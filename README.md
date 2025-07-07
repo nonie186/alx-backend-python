@@ -51,8 +51,22 @@ for user in islice(stream_users(), 6):
 
 (venv) faithokoth@Faiths-MacBook-Pro python-generators-0x00 %
 
-Repo:
+# 2. Batch processing Large Data
+mandatory
+Objective: Create a generator to fetch and process data in batches from the users database
 
+##Instructions:
+Write a function stream_users_in_batches(batch_size) that fetches rows in batches
+
+Write a function batch_processing() that processes each batch to filter users over the age of25`
+
+You must use no more than 3 loops in your code. Your script must use the yield generator
+
+##Prototypes:
+def stream_users_in_batches(batch_size)
+def batch_processing(batch_size)
+
+#Repo:
 GitHub repository: alx-backend-python
 Directory: python-generators-0x00
 File: 0-stream_users.py
