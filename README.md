@@ -19,7 +19,7 @@ def connect_to_prodev() connects the the ALX_prodev database in MYSQL
 def create_table(connection):- creates a table user_data if it does not exists with the required fields
 def insert_data(connection, data):- inserts data in the database if it does not exist
 
-# 1. generator that streams rows from an SQL database
+# 1. Generator that streams rows from an SQL database
 mandatory
 Objective: create a generator that streams rows from an SQL database one by one.
 
@@ -86,3 +86,19 @@ def batch_processing(batch_size)
 GitHub repository: alx-backend-python
 Directory: python-generators-0x00
 File: 0-stream_users.py
+
+# 4. Memory-Efficient Aggregation with Generators
+
+Objective: to use a generator to compute a memory-efficient aggregate function i.e average age for a large dataset
+
+## Instruction:
+
+Implement a generator stream_user_ages() that yields user ages one by one.
+
+Use the generator in a different function to calculate the average age without loading the entire dataset into memory
+
+Your script should print Average age of users: average age
+
+You must use no more than two loops in your script
+
+You are not allowed to use the SQL AVERAGE
