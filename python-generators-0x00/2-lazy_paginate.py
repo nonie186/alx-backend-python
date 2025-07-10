@@ -1,48 +1,45 @@
 import mysql.connector
+from mysql.connector import Error
 
+# ✅ Helper function to fetch a single page of users
 def paginate_users(page_size, offset):
-    """
-    Fetches a single page of users starting from the given offset.
-    
-    Returns:
-        list of dicts: Each dict represents a user row.
-    """
-    conn = mysql.connector.connect(
-        host="localhost",
-        user="YOUR_USER",
-        password="YOUR_PASSWORD",
-        database="YOUR_DB",
-        cursorclass=mysql.connector.cursor.DictCursor
-    )
     try:
-        cursor = conn.cursor()
-        cursor.execute(
-            "SELECT id, name, age FROM users LIMIT %s OFFSET %s",
-            (page_size, offset)
+        connection = mysql.connector.connect(
+            host='localhost',
+            user='root',
+            password='YourPasswordHere',  # Replace with your password
+            database='ALX_prodev'
         )
-        return cursor.fetchall()
-    finally:
-        conn.close()
 
+        if connection.is_connected():
+            cursor = connection.cursor(dictionary=True)
+            query = "SELECT * FROM user_data LIMIT %s OFFSET %s"
+            cursor.execute(query, (page_size, offset))
+            rows = cursor.fetchall()
+            cursor.close()
+            connection.close()
+            return rows
 
+    except Error as e:
+        print(f"Database error: {e}")
+        return []
+
+# ✅ Generator that yields one page at a time lazily
 def lazy_paginate(page_size):
-    """
-    Generator to lazily fetch users page by page.
-    
-    Yields:
-        list[dict]: Next page of users
-    """
     offset = 0
-    while True:  # ← Only loop used
+    while True:
         page = paginate_users(page_size, offset)
         if not page:
             break
-        yield page
+        yield page  # ✅ Yield a page of users
         offset += page_size
 
+# Testing
+#!/usr/bin/python3
+from itertools import islice
+lazy_paginate = __import__('2-lazy_paginate').lazy_paginate
 
-# --- Example usage ---
-if __name__ == "__main__":
-    for page in lazy_paginate(page_size=100):
-        print(f"Fetched {len(page)} users.")
-
+# Print first 2 pages of 3 users each
+for page in islice(lazy_paginate(3), 2):
+    for user in page:
+        print(user)
