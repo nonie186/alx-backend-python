@@ -39,6 +39,7 @@ def fetch_all_users(query):
     conn.close()
     return results
 
-# 
-When this runs, it will also log the query before execution
+# When this runs, it will also log the query before execution
 users = fetch_all_users(query="SELECT * FROM users")
+
+# Fix: trigger repo refresh
