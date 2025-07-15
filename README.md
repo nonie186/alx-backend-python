@@ -102,3 +102,4 @@ Your script should print Average age of users: average age
 You must use no more than two loops in your script
 
 You are not allowed to use the SQL AVERAGE
+I am not sure,just testing
