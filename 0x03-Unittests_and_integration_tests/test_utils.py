@@ -71,7 +71,4 @@ class TestMemoize(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 
-# Assertions
-mock_get.assert_called_once_with(test_url)
-self.assertEqual(result, test_payload)
 
